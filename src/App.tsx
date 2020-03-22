@@ -1,16 +1,12 @@
 import React from 'react';
 import './App.css';
-import CodeMirror from './CodeMirror';
 import '../node_modules/codemirror/lib/codemirror.css';
+import Repl from './Repl';
 
 function App() {
   return (
     <div className="App">
-      <CodeMirror
-        options={{}}
-        value={''}
-        onChange={() => {}}
-      />
+      <Repl/>
     </div>
   );
 }
