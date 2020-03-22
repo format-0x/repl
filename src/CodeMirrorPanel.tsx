@@ -9,6 +9,7 @@ export const Panel = styled.div`
   flex-direction: column;
   height: 100%;
   justify-content: stretch;
+  width: 100%;
 `;
 
 export const CodeMirrorContainer = styled.div`

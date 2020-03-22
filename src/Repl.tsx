@@ -23,12 +23,12 @@ const Repl = (): ReactElement => {
     <Container>
       <Panels>
         <CodeMirrorPanel
-          options={{}}
+          options={{ mode: 'text/x-vb' }}
           value={code}
           onChange={setCode}
         />
         <CodeMirrorPanel
-          options={{}}
+          options={{ mode: 'javascript' }}
           value={compiled}
         />
       </Panels>

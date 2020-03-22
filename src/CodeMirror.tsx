@@ -3,8 +3,8 @@ import React, { useRef, useEffect, ReactElement } from 'react';
 
 export const DEFAULT_CODE_MIRROR_OPTIONS: EditorConfiguration = {
   lineNumbers: true,
-  mode: 'text/jsx',
   tabSize: 2,
+  theme: 'mbo',
 };
 
 export type CodeMirrorOption = keyof EditorConfiguration;
