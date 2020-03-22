@@ -9,7 +9,11 @@ import Repl from './Repl';
 function App() {
   return (
     <div className="App">
-      <Repl/>
+      <Repl
+        optionsLeft={{ mode: 'text/x-vb' }}
+        optionsRight={{ mode: 'javascript' }}
+        compiler={(code: string) => code}
+      />
     </div>
   );
 }

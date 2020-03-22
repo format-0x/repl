@@ -51,7 +51,9 @@ const CodeMirror = (props: CodeMirrorProps): ReactElement => {
 
   useEffect(() => {
     if (codeMirrorInstance.current) {
+      const cursor = codeMirrorInstance.current.getCursor();
       codeMirrorInstance.current.setValue(props.value);
+      codeMirrorInstance.current.setCursor(cursor);
     }
   }, [props.value]);
 

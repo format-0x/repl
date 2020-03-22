@@ -2,7 +2,15 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import CodeMirror, { CodeMirrorProps } from './CodeMirror';
 
-export interface CodeMirrorPanelProps extends CodeMirrorProps {}
+export interface CodeMirrorPanelProps extends CodeMirrorProps {
+  error: Error | null;
+}
+
+export const ErrorMessage = styled.div`
+  flex: none;
+  max-height: 30%;
+  padding: 0.5rem 0.75rem;
+`;
 
 export const Panel = styled.div`
   display: flex;
@@ -18,7 +26,7 @@ export const CodeMirrorContainer = styled.div`
 `;
 
 const CodeMirrorPanel = (props: CodeMirrorPanelProps): ReactElement => {
-  const { value, onChange, options, placeholder } = props;
+  const { value, onChange, options, placeholder, error } = props;
 
   return (
     <Panel>
@@ -30,6 +38,10 @@ const CodeMirrorPanel = (props: CodeMirrorPanelProps): ReactElement => {
           placeholder={placeholder}
         />
       </CodeMirrorContainer>
+      {error &&
+         <ErrorMessage>
+           {error.message}
+         </ErrorMessage>}
     </Panel>
   );
 };
