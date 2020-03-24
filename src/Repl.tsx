@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import io from 'socket.io-client';
 import CodeMirrorPanel from './CodeMirrorPanel';
 import { EditorConfiguration } from 'codemirror';
+import { handleNamedArgs } from './helpers';
+
+const preload = handleNamedArgs.toString();
 
 const Container = styled.div`
   display: flex;
@@ -36,7 +39,7 @@ const Repl = (props: ReplProps): ReactElement => {
 
   useEffect(() => {
     socket.on('message', (compiled: string) => {
-      setCompiled(compiled);
+      setCompiled(`${preload}\n${compiled}`);
       setCompileError(null);
     });
     socket.on('compileError', setCompileError);
