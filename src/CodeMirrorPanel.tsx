@@ -40,7 +40,7 @@ const CodeMirrorPanel = (props: CodeMirrorPanelProps): ReactElement => {
       </CodeMirrorContainer>
       {error &&
          <ErrorMessage>
-           {error.message}
+           {error}
          </ErrorMessage>}
     </Panel>
   );

@@ -12,7 +12,6 @@ function App() {
       <Repl
         optionsLeft={{ mode: 'text/x-vb' }}
         optionsRight={{ mode: 'javascript' }}
-        compiler={(code: string) => code}
       />
     </div>
   );

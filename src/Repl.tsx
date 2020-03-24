@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import io from 'socket.io-client';
 import CodeMirrorPanel from './CodeMirrorPanel';
 import { EditorConfiguration } from 'codemirror';
 
@@ -15,8 +16,14 @@ const Panels = styled(Container)``;
 export type ReplProps = {
   optionsLeft: EditorConfiguration;
   optionsRight: EditorConfiguration;
-  compiler: (code: string) => string;
 }
+
+const socket = io('http://localhost:3000');
+socket.on('disconnect', (reason: string) => {
+  if (reason === 'io server disconnect') {
+    socket.connect();
+  }
+});
 
 const Repl = (props: ReplProps): ReactElement => {
   const [code, setCode] = useState<string>('');
@@ -24,12 +31,16 @@ const Repl = (props: ReplProps): ReactElement => {
   const [compileError, setCompileError] = useState<Error | null>(null);
 
   useEffect(() => {
-    try {
-      setCompiled(props.compiler(code));
-    } catch (error) {
-      setCompileError(error);
-    }
+    socket.emit('compile', code);
   }, [code]);
+
+  useEffect(() => {
+    socket.on('message', (compiled: string) => {
+      setCompiled(compiled);
+      setCompileError(null);
+    });
+    socket.on('compileError', setCompileError);
+  }, []);
 
   return (
     <Container>
