@@ -21,7 +21,7 @@ export type ReplProps = {
   optionsRight: EditorConfiguration;
 }
 
-const socket = io('http://localhost:3000');
+const socket = io('http://backend:5000');
 socket.on('disconnect', (reason: string) => {
   if (reason === 'io server disconnect') {
     socket.connect();
