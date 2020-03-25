@@ -43,6 +43,8 @@ const Repl = (props: ReplProps): ReactElement => {
       setCompileError(null);
     });
     socket.on('compileError', setCompileError);
+    socket.on('code', setCode);
+    socket.emit('preload');
   }, []);
 
   return (
