@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import io from 'socket.io-client';
 import CodeMirrorPanel from './CodeMirrorPanel';
 import { EditorConfiguration } from 'codemirror';
-import { handleNamedArgs } from './helpers';
-
-const preload = handleNamedArgs.toString();
+import preload from './preload';
 
 const Container = styled.div`
   display: flex;
@@ -21,7 +19,7 @@ export type ReplProps = {
   optionsRight: EditorConfiguration;
 }
 
-const socket = io('http://backend:5000');
+const socket = io('http://178.62.218.193/:5000');
 socket.on('disconnect', (reason: string) => {
   if (reason === 'io server disconnect') {
     socket.connect();

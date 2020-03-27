@@ -1,10 +1,12 @@
 import CM, { EditorConfiguration, Editor } from 'codemirror';
 import React, { useRef, useEffect, ReactElement } from 'react';
+import CodeMirrorPanel from './CodeMirrorPanel';
 
 export const DEFAULT_CODE_MIRROR_OPTIONS: EditorConfiguration = {
   lineNumbers: true,
   tabSize: 2,
   theme: 'mbo',
+  lineWrapping: true,
 };
 
 export type CodeMirrorOption = keyof EditorConfiguration;

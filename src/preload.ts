@@ -1,17 +1,17 @@
-export function handleNamedArgs(this: any, func: Function, rawArgs: { [key: string]: any }) {
-  const isNotUndefined = (value: any) => typeof value !== 'undefined';
-  const FUNCTION_ARGS = /^(?:function)?\s*[^(]*\(\s*([^)]*)\)/;
+export default `function handleNamedArgs(func, rawArgs) {
+  const isNotUndefined = (value) => typeof value !== 'undefined';
+  const FUNCTION_ARGS = /^(?:function)?\\s*[^(]*\\(\\s*([^)]*)\\)/;
   const match = func.toString().match(FUNCTION_ARGS);
 
   if (!match) throw new Error('');
 
   const [, args] = match;
   const extractedArgs = args
-    .replace(/(?:\s+|=[^),]+)/g, '')
+    .replace(/(?:\\s+|=[^),]+)/g, '')
     .split(',');
   const [lastArg] = extractedArgs.slice(-1);
-  const seenRest = /^\./.test(lastArg);
-  const used: string[] = [];
+  const seenRest = /^\\./.test(lastArg);
+  const used = [];
   const handledArgs = extractedArgs
     .slice(0, extractedArgs.length - +seenRest)
     .map((arg, i) => {
@@ -31,4 +31,4 @@ export function handleNamedArgs(this: any, func: Function, rawArgs: { [key: stri
   }
 
   return func.apply(this, handledArgs);
-}
+}`;
